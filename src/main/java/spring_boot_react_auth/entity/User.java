@@ -1,44 +1,37 @@
-package spring_boot_react_auth;
+package spring_boot_react_auth.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection="User")
+@Document(collection = "User")
 public class User {
-	@Id
-	private int id;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String passwordHash;
-	private LocalDateTime createdAt;
 
-	public User() {}
+    @Id
+    private String id;
 
-	public User(String firstName, String lastName, String email, String passwordHash) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.passwordHash = passwordHash;
-	}
+    @NotBlank(message = "First name is required")
+    private String firstName;
 
-	public String getId() {return id;}
-	public String getFirstName() {return firstName;}
-	public void setFirstName(String firstName) {this.firstName = firstName;}
-	public String getLastName() {return lastName;}
-	public void setLastName(String lastName) {this.lastName = lastName;}
-	public String getEmail() {return email;}
-	public void setEmail(String email) {this.email = email;}
-	public String setPassword(String password){passwordHash = endcoder.encode(password);}	
-	public boolean verifyPassword(String passwordHash){return this.passwordHash == passwordHash;}
-	public String toString(){
-		return "User [id=" + id + ", Name=" + firstName + " " + lastName + ", Email=" + email;
-	}
+    @NotBlank(message = "Last name is required")
+    private String lastName;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
+    private String email;
+
+    @NotBlank(message = "Password is required")
+    private String passwordHash;
+
+    private LocalDateTime createdAt;
 }
