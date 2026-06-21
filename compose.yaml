@@ -7,14 +7,4 @@ services:
       - MONGO_INITDB_DATABASE=mydatabase
     ports:
       - '27017:27017'
-    volumes:
-      - mongodb_data:/data/db
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-    healthcheck:
-      test: ["CMD-SHELL", "mongosh -u root -p secret --authenticationDatabase admin --eval 'db.adminCommand(\"ping\")' || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
-volumes:
-  mongodb_data:
