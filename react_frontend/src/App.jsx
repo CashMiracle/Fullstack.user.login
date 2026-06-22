@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Login.jsx';       // or just './components/Login'
+import Login from './components/Login.jsx'; 
 import Register from './components/Register.jsx';
 import Dashboard from './components/Dashboard.jsx';
 
@@ -21,7 +21,7 @@ function App() {
             <Dashboard />
           </ProtectedRoute>
         } />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   );

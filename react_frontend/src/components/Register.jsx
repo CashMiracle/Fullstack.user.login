@@ -40,20 +40,20 @@ const Register = () => {
       confirmPassword: form.confirmPassword.trim()
     };
 
-    // 1. HIGHEST PRIORITY: Validate email format
+    // Validate email format
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(cleaned.email)) {
       setError('Please enter a valid email address (e.g., name@domain.com).');
       return;
     }
 
-    // 2. MEDIUM PRIORITY: Password minimum length
+    // Password minimum length
     if (cleaned.password.length < 8) {
       setError('Password must be at least 8 characters long.');
       return;
     }
 
-    // 3. LOWEST PRIORITY: Passwords match
+    // Passwords match
     if (cleaned.password !== cleaned.confirmPassword) {
       setError('Passwords do not match.');
       return;
@@ -76,7 +76,6 @@ const Register = () => {
     <div>
       <h2>Register</h2>
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      {/* 👇 Added noValidate to disable browser validation */}
       <form onSubmit={handleSubmit} noValidate>
         <input
           name="firstName"
@@ -94,7 +93,7 @@ const Register = () => {
         />
         <input
           name="email"
-          type="email"           // Keep type="email" for mobile keyboard, but noValidate prevents browser validation
+          type="email" 
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
