@@ -30,9 +30,8 @@ services:
       context: ./react_frontend
     container_name: frontend
     ports:
-      - "5173:80"   # Map host 5173 to container 80
+      - "5173:5173"   
     environment:
-      # Vite prefix – change to REACT_APP_ if using CRA
       - VITE_BACKEND_URL=http://backend:8080
     depends_on:
       - backend
