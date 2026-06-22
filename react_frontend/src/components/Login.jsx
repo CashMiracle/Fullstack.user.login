@@ -14,7 +14,8 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await login(credentials);
+			const lowercasedCredentials = {...credentials, email: credentials.email.toLowerCase()};
+			const response = await login(lowercasedCredentials);
 			const { token, firstName, lastName, email } = response.data;
 			localStorage.setItem('token', token);
 			localStorage.setItem('user', JSON.stringify({ firstName, lastName, email }));

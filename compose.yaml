@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: 'mongo:latest'
+    container_name: database
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=mydatabase
+    ports:
+      - '27017:27017'
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./spring_boot_react_auth
+    container_name: backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://root:secret@mongodb:27017/mydatabase?authSource=admin
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+  frontend:
+    build:
+      context: ./react_frontend
+    container_name: frontend
+    ports:
+      - "5173:80"   # Map host 5173 to container 80
+    environment:
+      # Vite prefix – change to REACT_APP_ if using CRA
+      - VITE_BACKEND_URL=http://backend:8080
+    depends_on:
+      - backend
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
