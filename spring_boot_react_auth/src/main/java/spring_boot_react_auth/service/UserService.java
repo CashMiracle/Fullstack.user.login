@@ -1,4 +1,4 @@
-erControlackage spring_boot_react_auth.service;
+package spring_boot_react_auth.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
