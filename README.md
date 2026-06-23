@@ -10,7 +10,7 @@ http://localhost:5173/
 - Maven for spring-boot compilation
 - Npm for react compilation
 - Mongodb for database
-- Default Java PasswordEncoder class for password hashing
+- BCryptPasswordEncoder Java class for password hashing
 - JWT authentication
 - Default ports for each application used
 - Docker containers for frontend, backend, and database
